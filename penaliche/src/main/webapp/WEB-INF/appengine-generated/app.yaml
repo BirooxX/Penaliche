@@ -1,5 +1,5 @@
 application: 'penaliche-1160'
-runtime: java7
+runtime: java8
 version: 'alpha-001'
 inbound_services:
 - warmup

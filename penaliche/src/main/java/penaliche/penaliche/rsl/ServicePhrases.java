@@ -3,7 +3,6 @@ package penaliche.penaliche.rsl;
 import java.util.List;
 
 import penaliche.penaliche.dto.Phrase;
-import penaliche.penaliche.dto.RequetePhrase;
 
 /**
  * Web services exposés pour le traitememnt de phrase.
@@ -17,7 +16,7 @@ public interface ServicePhrases {
 	 * @param reqPhrase la requete.
 	 * @return une chaine
 	 */
-    public String soumettrePhrase(RequetePhrase reqPhrase);
+    public String soumettrePhrase(Phrase reqPhrase);
 
     public List<Phrase> recupererPhrase();
 }

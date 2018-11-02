@@ -15,9 +15,12 @@
  */
 package penaliche.penaliche.bll.impl;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.logging.Logger;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
 import com.googlecode.objectify.Objectify;
@@ -50,6 +53,17 @@ implements PhraseBLO {
      */
     public String soumettrePhrase(Phrase phrase) {
         try {
+
+            //Si la darte n'est pas renseignée, on met la date du jour.
+            if (StringUtils.isEmpty(phrase.getDate())) {
+                LocalDateTime now = LocalDateTime.now();
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
+                String formatDateTime = now.format(formatter);
+                phrase.setDate(formatDateTime);
+            } else {
+                //TO-DO : reformatter la date ?
+            }
+
             Objectify objectify = ObjectifyService.ofy();
             objectify.save().entity((Object)phrase).now();
             return "OK";

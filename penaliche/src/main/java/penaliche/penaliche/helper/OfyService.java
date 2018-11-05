@@ -22,6 +22,6 @@ public class OfyService implements ServletContextListener {
 	}
 
 	public void contextInitialized(ServletContextEvent arg0) {
-		ObjectifyService.register((Class<Phrase>)Phrase.class);
+		ObjectifyService.register(Phrase.class);
 	}
 }

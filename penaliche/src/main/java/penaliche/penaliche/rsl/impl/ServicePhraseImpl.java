@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.*;
 
 import penaliche.penaliche.bll.PhraseBLO;
 import penaliche.penaliche.dto.Phrase;
+import penaliche.penaliche.dto.RequetePhrase;
 import penaliche.penaliche.rsl.ServicePhrases;
 
 @RestController
@@ -33,7 +34,12 @@ implements ServicePhrases {
 
     @CrossOrigin
     @RequestMapping(value={"/phrase"}, method={RequestMethod.POST}, produces={"application/json"}, consumes={"application/json"})
-    public String soumettrePhrase(@RequestBody Phrase phrase) {
+    public String soumettrePhrase(@RequestBody RequetePhrase reqPhrase) {
+        Phrase phrase = new Phrase();
+        phrase.setPhraseLabel(reqPhrase.getPhraseLabel());
+        phrase.setAuteur(reqPhrase.getAuteur());
+        phrase.setDenonceur(reqPhrase.getDenonceur());
+        phrase.setCategorie(reqPhrase.getCategorie());
         return this.PhraseBLO.soumettrePhrase(phrase);
 
     }

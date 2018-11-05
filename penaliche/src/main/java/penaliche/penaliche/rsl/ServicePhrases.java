@@ -16,7 +16,7 @@ public interface ServicePhrases {
 	 * @param reqPhrase la requete.
 	 * @return une chaine
 	 */
-    public String soumettrePhrase(Phrase reqPhrase);
+    String soumettrePhrase(Phrase reqPhrase);
 
-    public List<Phrase> recupererPhrase();
+    List<Phrase> recupererPhrase();
 }

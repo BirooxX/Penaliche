@@ -3,6 +3,10 @@ package penaliche.penaliche.dto;
 import com.google.gson.Gson;
 import com.googlecode.objectify.annotation.Entity;
 import com.googlecode.objectify.annotation.Id;
+import com.googlecode.objectify.annotation.Index;
+
+import java.time.LocalDateTime;
+import java.util.Date;
 
 /**
  * DTO Phrase.
@@ -19,6 +23,8 @@ public class Phrase {
     private String denonceur;
     private String phraseLabel;
     private Categorie categorie;
+    @Index
+    private Date localDateTime;
 
     /**
      * Renvoi la phrase au format JSON.
@@ -86,5 +92,13 @@ public class Phrase {
 
     public void setCategorie(Categorie categorie) {
         this.categorie = categorie;
+    }
+
+    public Date getLocalDateTime() {
+        return localDateTime;
+    }
+
+    public void setLocalDateTime(Date localDateTime) {
+        this.localDateTime = localDateTime;
     }
 }

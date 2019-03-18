@@ -17,6 +17,7 @@ package penaliche.penaliche.bll.impl;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -28,6 +29,7 @@ import com.googlecode.objectify.ObjectifyService;
 
 import penaliche.penaliche.bll.PhraseBLO;
 import penaliche.penaliche.dto.Phrase;
+import penaliche.penaliche.dto.RequetePhrase;
 import penaliche.penaliche.helper.OfyService;
 
 
@@ -48,11 +50,17 @@ implements PhraseBLO {
     
     /**
      * Permet d'enregistrer une Phraseen BDD.
-     * @param phrase La phrase à enregistrer
+     * @param reqPhrase La phrase à enregistrer
      * @return OK si tout s'est bien passé, le message d'erreur sinon.
      */
-    public String soumettrePhrase(Phrase phrase) {
+    public String soumettrePhrase(RequetePhrase reqPhrase) {
         try {
+
+            Phrase phrase = new Phrase();
+            phrase.setPhraseLabel(reqPhrase.getPhraseLabel());
+            phrase.setAuteur(reqPhrase.getAuteur());
+            phrase.setDenonceur(reqPhrase.getDenonceur());
+            phrase.setCategorie(reqPhrase.getCategorie());
 
             //Si la darte n'est pas renseignée, on met la date du jour.
             if (StringUtils.isEmpty(phrase.getDate())) {
@@ -60,8 +68,7 @@ implements PhraseBLO {
                 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
                 String formatDateTime = now.format(formatter);
                 phrase.setDate(formatDateTime);
-            } else {
-                //TO-DO : reformatter la date ?
+                phrase.setLocalDateTime(new Date());
             }
 
             Objectify objectify = ObjectifyService.ofy();
@@ -79,6 +86,14 @@ implements PhraseBLO {
      * @return La liste des phrases.
      */
     public List<Phrase> recupererPhrase() {
-        return ObjectifyService.ofy().load().type((Class<Phrase>)Phrase.class).list();
+        return ObjectifyService.ofy().load().type((Class<Phrase>)Phrase.class).order("-localDateTime").list();
+    }
+
+    /**
+     * Permet de récuperer les dernières phrases
+     * @return
+     */
+    public List<Phrase> recupererDernieresPhrases() {
+        return ObjectifyService.ofy().load().type((Class<Phrase>)Phrase.class).order("-localDateTime").limit(6).list();
     }
 }

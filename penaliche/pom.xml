@@ -4,7 +4,7 @@
 
 	<groupId>penaliche</groupId>
 	<artifactId>penaliche</artifactId>
-	<version>1.0.0</version>
+	<version>1.1.0</version>
 	<packaging>war</packaging>
 	<name>penaliche</name>
 	<url>http://maven.apache.org</url>
@@ -70,7 +70,7 @@
 				<artifactId>appengine-maven-plugin</artifactId>
 				<version>${google.app.engine.version}</version>
 				<configuration>
-					<project>penaliche-01</project>
+					<project>penaliche-1160</project>
 				</configuration>
 			</plugin>
 		</plugins>

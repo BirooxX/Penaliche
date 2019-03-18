@@ -1,6 +1,4 @@
-application: 'penaliche-1160'
 runtime: java8
-version: 'alpha-001'
 inbound_services:
 - warmup
 derived_file_type:

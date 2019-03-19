@@ -10,7 +10,7 @@ import penaliche.penaliche.dto.Phrase;
 import penaliche.penaliche.dto.RequetePhrase;
 
 @RestController
-public class ServicePhraseImpl {
+public class PhraseService {
 
     @Autowired
     PhraseBLO PhraseBLO;

@@ -14,6 +14,7 @@ public class RequetePhrase {
     private String auteur;
     private String denonceur;
     private String phraseLabel;
+    private String contexte;
     private Categorie categorie;
 
     /**
@@ -50,6 +51,14 @@ public class RequetePhrase {
 
     public Categorie getCategorie() {
         return this.categorie;
+    }
+
+    public String getContexte() {
+        return contexte;
+    }
+
+    public void setContexte(String contexte) {
+        this.contexte = contexte;
     }
 
     public void setAuteur(String auteur) {

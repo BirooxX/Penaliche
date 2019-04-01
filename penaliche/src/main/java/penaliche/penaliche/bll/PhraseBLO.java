@@ -58,6 +58,7 @@ public class PhraseBLO {
             phrase.setAuteur(reqPhrase.getAuteur());
             phrase.setDenonceur(reqPhrase.getDenonceur());
             phrase.setCategorie(reqPhrase.getCategorie());
+            phrase.setContexte(reqPhrase.getContexte());
 
             //Si la darte n'est pas renseignée, on met la date du jour.
             if (StringUtils.isEmpty(phrase.getDate())) {

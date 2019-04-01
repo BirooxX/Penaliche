@@ -21,6 +21,7 @@ public class Phrase {
     private String date;
     private String auteur;
     private String denonceur;
+    private String contexte;
     private String phraseLabel;
     private Categorie categorie;
     @Index
@@ -92,6 +93,14 @@ public class Phrase {
 
     public void setCategorie(Categorie categorie) {
         this.categorie = categorie;
+    }
+
+    public String getContexte() {
+        return contexte;
+    }
+
+    public void setContexte(String contexte) {
+        this.contexte = contexte;
     }
 
     public Date getLocalDateTime() {

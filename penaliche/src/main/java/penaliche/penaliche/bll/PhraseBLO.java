@@ -17,9 +17,13 @@ package penaliche.penaliche.bll;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Logger;
+import java.util.regex.MatchResult;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
@@ -84,7 +88,30 @@ public class PhraseBLO {
      * @return La liste des phrases.
      */
     public List<Phrase> recupererPhrase() {
-        return ObjectifyService.ofy().load().type((Class<Phrase>)Phrase.class).order("-localDateTime").list();
+        List<Phrase> listePhrase = ObjectifyService.ofy().load().type((Class<Phrase>)Phrase.class).order("-localDateTime").list();
+
+        replacePeopleOnLabel(listePhrase);
+
+        return listePhrase;
+    }
+
+    /**
+     * Remplace les noms des personnes dans les phrases. Les noms doivent être entre "["
+     * et sont remplacés par des entiers.
+     * @param listePhrase
+     */
+    private void replacePeopleOnLabel(List<Phrase> listePhrase) {
+        for (Phrase phrase: listePhrase) {
+
+            List<String> allMatches = new ArrayList<>();
+            Matcher m = Pattern.compile("\\[[A-Za-z0-9\\-]+\\]")
+                    .matcher(phrase.getPhraseLabel());
+            int i = 1;
+            while (m.find()) {
+                phrase.setPhraseLabel(phrase.getPhraseLabel().replace(m.group(), String.format("[%d]", i)));
+                i++;
+            }
+        }
     }
 
     /**
@@ -92,6 +119,8 @@ public class PhraseBLO {
      * @return
      */
     public List<Phrase> recupererDernieresPhrases() {
-        return ObjectifyService.ofy().load().type((Class<Phrase>)Phrase.class).order("-localDateTime").limit(5).list();
+        List<Phrase> listePhrase = ObjectifyService.ofy().load().type((Class<Phrase>)Phrase.class).order("-localDateTime").limit(5).list();
+        replacePeopleOnLabel(listePhrase);
+        return listePhrase;
     }
 }

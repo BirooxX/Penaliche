@@ -4,7 +4,7 @@
 
 	<groupId>penaliche</groupId>
 	<artifactId>penaliche</artifactId>
-	<version>1.2.0</version>
+	<version>1.4.0</version>
 	<packaging>war</packaging>
 	<name>penaliche</name>
 	<url>http://maven.apache.org</url>
